@@ -1,21 +1,20 @@
-const { defineConfig } = require("@playwright/test");
-const dotenv = require("dotenv");
+import { defineConfig } from "@playwright/test";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: "tests",
-  maxFailures: 10,
   workers: 1,
-  retries: 0,
-  fullyParallel: false,
+  reporter: [["html", { open: "never" }]],
+  //globalSetup: "./setup/globalSetup.js",
   use: {
     headless: false,
     viewport: { width: 1366, height: 768 },
     baseURL: process.env.BASE_URL,
-    reporter: [["html", { outputFolder: "playwright-report" }]],
     screenshot: "only-on-failure",
     video: "retain-on-failure",
+    //storageState: undefined,
   },
   projects: [
     {

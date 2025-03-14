@@ -1,12 +1,15 @@
+import { expect } from "@playwright/test";
 class HomePage {
   constructor(page) {
     this.page = page;
     this.myAccountLink = page.getByRole("link", { name: " My Account " });
     this.loginLink = page.locator("#top").getByRole("link", { name: "Login" });
+    this.homeYourStore = page.getByRole("link", { name: "Your Store" });
   }
 
   async goToHomePage() {
-    await this.page.goto("en-gb?route=common/home");
+    await this.page.goto("/en-gb?route=common/home");
+    await expect(this.homeYourStore).toBeVisible();
   }
 
   async openMyAccount() {
@@ -17,4 +20,5 @@ class HomePage {
     await this.loginLink.click();
   }
 }
-module.exports = HomePage;
+
+export default HomePage;
