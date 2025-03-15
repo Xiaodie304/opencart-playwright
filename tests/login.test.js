@@ -65,4 +65,14 @@ test.describe("Login", () => {
     await login.expectForgottenPassword();
     await login.clickForgottenPassword();
   });
+  test("Validate logging into the application and browsing back using browsing back button", async () => {
+    await home.goToHomePage();
+    await home.openMyAccount();
+    await home.clickLogin();
+    await login.login();
+    await myAccount.expectLogin();
+    await page.goBack();
+    await home.openMyAccount();
+    await home.expectLoginHidden();
+  });
 });

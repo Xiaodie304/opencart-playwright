@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: "tests",
   workers: 1,
   reporter: [["html", { open: "never" }]],
-  //globalSetup: "./setup/globalSetup.js",
+  globalSetup: "./setup/globalSetup.js",
   use: {
     headless: false,
     viewport: { width: 1366, height: 768 },

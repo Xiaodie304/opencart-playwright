@@ -1,14 +1,18 @@
 import { expect } from "@playwright/test";
-class LoginPage {
+class MyAccountPage {
   constructor(page) {
     this.page = page;
     this.affiliateHeading = page.getByRole("link", {
       name: "Edit your account information",
     });
+    this.logoutRightColumn = page.getByRole("link", { name: "Logout" });
   }
   async expectLogin() {
     await expect(this.affiliateHeading).toBeVisible();
   }
+  async clickLogout() {
+    await this.logoutRightColumn.click();
+  }
 }
 
-export default LoginPage;
+export default MyAccountPage;

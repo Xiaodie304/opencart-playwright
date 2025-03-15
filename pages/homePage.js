@@ -5,6 +5,9 @@ class HomePage {
     this.myAccountLink = page.getByRole("link", { name: " My Account " });
     this.loginLink = page.locator("#top").getByRole("link", { name: "Login" });
     this.homeYourStore = page.getByRole("link", { name: "Your Store" });
+    this.logout = this.page
+      .locator("#top")
+      .getByRole("link", { name: "Logout" });
   }
 
   async goToHomePage() {
@@ -18,6 +21,16 @@ class HomePage {
 
   async clickLogin() {
     await this.loginLink.click();
+  }
+  async clickLogout() {
+    await expect(this.logout).toBeVisible();
+    await this.logout.click();
+  }
+  async expectLogoutHidden() {
+    await expect(this.logout).not.toBeVisible();
+  }
+  async expectLoginHidden() {
+    await expect(this.loginLink).not.toBeVisible();
   }
 }
 
