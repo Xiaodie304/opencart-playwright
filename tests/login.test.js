@@ -23,55 +23,75 @@ test.describe("Login", () => {
     await context.close();
   });
 
-  test("Validate logging into the application using valid credentials", async () => {
+  test("TC-01 Validate logging into the application using valid credentials", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.login();
     await myAccount.expectLogin();
   });
-  test("Validate logging into the application using invalid credentials", async () => {
+  test("TC-02 Validate logging into the application using invalid credentials", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.loginWithInvalidUsernameAndPassword();
     await login.expectInvalidLogin();
   });
-  test("Validate logging into the application using invalid password", async () => {
+  test("TC-03 Validate logging into the application using invalid password", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.loginWithInvalidPasword();
     await login.expectInvalidLogin();
   });
-  test("Validate logging into the application using invalid mail", async () => {
+  test("TC-04 Validate logging into the application using invalid mail", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.loginWithInvalidMail();
     await login.expectInvalidLogin();
   });
-  test("Validate logging into the application without providing anhy credentials", async () => {
+  test("TC-05 Validate logging into the application without providing anhy credentials", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.loginWithoutCredentials();
     await login.expectInvalidLogin();
   });
-  test("Validate 'Forgotten Password' link is available in the Login page and is working", async () => {
+  test("TC-06 Validate 'Forgotten Password' link is available in the Login page and is working", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.expectForgottenPassword();
     await login.clickForgottenPassword();
   });
-  test("Validate logging into the application and browsing back using browsing back button", async () => {
+  test("TC-07 Validate logging into the application and browsing back using browsing back button", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.login();
     await myAccount.expectLogin();
     await page.goBack();
+    await home.openMyAccount();
+    await home.expectLoginHidden();
+  });
+  test("TC08- Validate Logging into the application, closing the Browser without loggingout and opening the application in the Browser again", async ({
+    browser,
+    browserName,
+  }) => {
+    await home.goToHomePage();
+    await home.openMyAccount();
+    await home.clickLogin();
+    await login.login();
+    await myAccount.expectLogin();
+    const statePath = `storage/state-${browserName}.json`;
+    await context.storageState({ path: statePath });
+    await page.close();
+    context = await browser.newContext({ storageState: statePath });
+    page = await context.newPage();
+    home = new HomePage(page);
+    myAccount = new MyAccountPage(page);
+    await home.goToHomePage();
     await home.openMyAccount();
     await home.expectLoginHidden();
   });
