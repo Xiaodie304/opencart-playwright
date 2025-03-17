@@ -11,7 +11,7 @@ class SearchPage {
     ); // CSS selector in DevTools
     this.wishListButton = page.locator('button[formaction*="wishlist.add"]');
     this.shoppingCart = page.getByRole("link", { name: " Shopping Cart" });
-    this.susseccMessage = page.getByText("Success: You have added iMac");
+    this.susseccMessage = page.getByText("Success: You have added");
     this.warringMessage = page.getByText("Warning:");
     this.noProductsMessage = page.getByText("There is no product that");
     this.iMac = page.getByText("iMac", { exact: true });
@@ -44,6 +44,10 @@ class SearchPage {
     this.mandatoryField = page.getByText("Review Name must be between 3");
     this.continueButtonReview = page.getByRole("button", {
       name: "Continue",
+    });
+    this.susseccMessageLinkShoppingCart = page.getByRole("link", {
+      name: "shopping cart",
+      exact: true,
     });
   }
   async expectProductDisplayed() {
@@ -108,6 +112,9 @@ class SearchPage {
   async clickAddToCartButton() {
     await this.addtoCartButton.click();
   }
+  async clickAddToCartButton3() {
+    await this.addtoCartButton.nth(2).click();
+  }
   async expectProductDescription() {
     await this.imgIMac.click();
     await this.productDescription.click();
@@ -127,6 +134,9 @@ class SearchPage {
   }
   async clickWishListButton() {
     await this.wishListButton.click();
+  }
+  async shoppingCartLinkInSuccessMessage() {
+    await this.susseccMessageLinkShoppingCart.click();
   }
 }
 export default SearchPage;

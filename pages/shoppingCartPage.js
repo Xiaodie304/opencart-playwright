@@ -9,6 +9,9 @@ class ShoppingCartPage {
     this.comntinueShopping = page.getByRole("link", {
       name: "Continue Shopping",
     });
+    this.iMacProduct = page.getByRole("cell", {
+      name: "iMac - Model: Product",
+    });
   }
   async expectShoppingCart() {
     await expect(this.shoppingCart).toBeVisible();
@@ -16,6 +19,9 @@ class ShoppingCartPage {
   async clickContinueShopping() {
     await expect(this.comntinueShopping).toBeVisible();
     await this.comntinueShopping.click();
+  }
+  async expectIMacProduct() {
+    await expect(this.iMacProduct).toBeVisible();
   }
 }
 export default ShoppingCartPage;

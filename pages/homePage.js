@@ -32,6 +32,13 @@ class HomePage {
       name: " 1 item(s) - $",
     });
     this.viewCart = page.getByRole("link", { name: " View Cart" });
+    this.showAllDesktops = page.getByRole("link", {
+      name: "Show All Desktops",
+    });
+    this.shoppingCartPage = page.getByRole("link", { name: " Shopping Cart" });
+    this.addIphoneToCart = page
+      .locator('button[formaction*="checkout/cart.add"]')
+      .nth(1);
   }
 
   async goToHomePage() {
@@ -88,6 +95,16 @@ class HomePage {
   async clickShoppingCartIconBlack() {
     await this.shoppingCartIcon.click();
     await this.viewCart.click();
+  }
+  async clickMenuDesktopsAndShowAll() {
+    await this.desktopsLink.hover();
+    await this.showAllDesktops.click();
+  }
+  async gotoShoppingCartPage() {
+    await this.shoppingCartPage.click();
+  }
+  async addIphoneToCartInFeatured() {
+    await this.addIphoneToCart.click();
   }
 }
 
