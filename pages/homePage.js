@@ -27,6 +27,11 @@ class HomePage {
     this.featuredProducts2 = page.getByText("iPhone", { exact: true });
     this.featuredProducts3 = page.getByText("Apple Cinema 30");
     this.featuredProducts4 = page.getByText("Canon EOS 5D");
+    this.wishList = page.getByRole("link", { name: /Wish List \(\d+\)/ });
+    this.shoppingCartIcon = page.getByRole("button", {
+      name: " 1 item(s) - $",
+    });
+    this.viewCart = page.getByRole("link", { name: " View Cart" });
   }
 
   async goToHomePage() {
@@ -51,8 +56,10 @@ class HomePage {
   async expectLoginHidden() {
     await expect(this.loginLink).not.toBeVisible();
   }
-  async fiilSearchBoxAndClickSearch() {
-    await this.fillSearch.fill("iMac");
+  async fillSearchBoxAndClickSearch(fillSearch = null) {
+    if (fillSearch) {
+      await this.fillSearch.fill(fillSearch);
+    }
     await expect(this.searchButton).toBeVisible();
     await this.searchButton.click();
   }
@@ -75,14 +82,12 @@ class HomePage {
     await expect(this.featuredProducts3).toBeVisible();
     await expect(this.featuredProducts4).toBeVisible();
   }
-  async fillSearchBoxAndClickSearchWithNonExistingProduct() {
-    await this.fillSearch.fill("Fitbit");
-    await expect(this.searchButton).toBeVisible();
-    await this.searchButton.click();
+  async clickWishList() {
+    await this.wishList.click();
   }
-  async noFillSearchBoxAndClickSearch() {
-    await expect(this.searchButton).toBeVisible();
-    await this.searchButton.click();
+  async clickShoppingCartIconBlack() {
+    await this.shoppingCartIcon.click();
+    await this.viewCart.click();
   }
 }
 

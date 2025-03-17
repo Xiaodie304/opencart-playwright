@@ -24,7 +24,7 @@ test.describe("Home", () => {
   });
   test("TC01-Validate navigating to Home Page from 'Shopping Cart' page", async () => {
     await home.goToHomePage();
-    await home.fiilSearchBoxAndClickSearch();
+    await home.fillSearchBoxAndClickSearch("iMac");
     await search.expectProductDisplayed();
     await search.clickAddToCartButton();
     await search.expectSuccessMessage();
@@ -49,7 +49,6 @@ test.describe("Home", () => {
     await home.goToHomePage();
     await home.clickMenuDesktopsPc();
     await home.expectHomeYourStore();
-    await page.pause();
   });
   test("TC04-Validate four featured products should be displayed in the Home Page", async () => {
     await home.goToHomePage();

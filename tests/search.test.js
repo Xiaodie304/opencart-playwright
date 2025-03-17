@@ -28,29 +28,58 @@ test.describe("Search", () => {
     await page.close();
     await context.close();
   });
-  test("Validate searching with an existing Product Name", async () => {
+  test("TC01-Validate searching with an existing Product Name", async () => {
     await home.goToHomePage();
-    await home.fiilSearchBoxAndClickSearch();
+    await home.fillSearchBoxAndClickSearch("iMac");
     await search.expectProductDisplayed();
   });
-  test("Validate searching with a non existing Product Name", async () => {
+  test("TC02-Validate searching with a non existing Product Name", async () => {
     await home.goToHomePage();
-    await home.fillSearchBoxAndClickSearchWithNonExistingProduct();
+    await home.fillSearchBoxAndClickSearch("Fibit");
     await search.expectNoProductsMessage();
   });
-  test("Validate searching without providing any Product Name", async () => {
+  test("TC03-Validate searching without providing any Product Name", async () => {
     await home.goToHomePage();
-    await home.noFillSearchBoxAndClickSearch();
+    await home.fillSearchBoxAndClickSearch();
     await search.expectNoProductsMessage();
   });
-  test("Validate searching for a product after login to the Application", async () => {
+  test("TC04-Validate searching for a product after login to the Application", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
     await login.login();
     await myAccount.expectLogin();
     await home.clickLogoOpencart();
-    await home.fiilSearchBoxAndClickSearch();
+    await home.fillSearchBoxAndClickSearch("iMac");
     await search.expectProductDisplayed();
+  });
+  test("TC05-Validate searching by providing a search criteria which results in mulitple products", async () => {
+    await home.goToHomePage();
+    await home.fillSearchBoxAndClickSearch("Mac");
+    await search.expectMultipleProductsDisplayed();
+  });
+  test("TC06-Validate searching using 'Search Criteria' field", async () => {
+    await home.goToHomePage();
+    await home.fillSearchBoxAndClickSearch();
+    await search.fillSearchCriteriaAndClickSearch("Mac");
+    await search.expectMultipleProductsDisplayed();
+  });
+  test("TC07-Validate Search by selecting the category of products", async () => {
+    await home.goToHomePage();
+    await home.fillSearchBoxAndClickSearch();
+    await search.fillSearchCriteriaAndClickSearch("Mac");
+    await search.expectMultipleProductsDisplayed();
+    await page.locator("#input-category").selectOption("26"); // PC
+    await search.clickSearchButtonInSearchPage();
+    await search.expectNoProductsMessage();
+  });
+  test("TC08-Validate Search by selecting to search in subcategories", async () => {
+    await home.goToHomePage();
+    await home.fillSearchBoxAndClickSearch();
+    await search.fillSearchCriteriaAndClickSearch("Mac");
+    await search.expectMultipleProductsDisplayed();
+    await page.locator("#input-category").selectOption("20"); // Desktops
+    await search.clickSearchButtonInSearchPage();
+    await search.expectIMacDisplayed();
   });
 });
