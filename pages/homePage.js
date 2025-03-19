@@ -39,6 +39,7 @@ class HomePage {
     this.addIphoneToCart = page
       .locator('button[formaction*="checkout/cart.add"]')
       .nth(1);
+    this.checkoutButton = page.getByRole("link", { name: " Checkout" });
   }
 
   async goToHomePage() {
@@ -105,6 +106,9 @@ class HomePage {
   }
   async addIphoneToCartInFeatured() {
     await this.addIphoneToCart.click();
+  }
+  async clickCheckout() {
+    await this.checkoutButton.click();
   }
 }
 

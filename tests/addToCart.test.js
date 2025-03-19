@@ -7,14 +7,8 @@ import MyAccountPage from "../pages/myAccountPage.js";
 import DesktopsPage from "../pages/desktopsPage.js";
 
 test.describe("Add To Cart", () => {
-  let context;
-  let page;
-  let home;
-  let search;
-  let shoppingCart;
-  let helper;
-  let myAccount;
-  let desktops;
+  let context, page;
+  let home, search, shoppingCart, helper, myAccount, desktops;
 
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();

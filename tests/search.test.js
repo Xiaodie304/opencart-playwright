@@ -6,13 +6,8 @@ import SearchPage from "../pages/searchPage.js";
 import ShoppingCartPage from "../pages/shoppingCartPage.js";
 
 test.describe("Search", () => {
-  let context;
-  let page;
-  let login;
-  let home;
-  let myAccount;
-  let search;
-  let shoppingCart;
+  let context, page;
+  let home, login, myAccount, search, shoppingCart;
 
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();

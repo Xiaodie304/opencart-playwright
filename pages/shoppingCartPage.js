@@ -12,6 +12,13 @@ class ShoppingCartPage {
     this.iMacProduct = page.getByRole("cell", {
       name: "iMac - Model: Product",
     });
+    this.emptyCart = page
+      .locator("#shopping-cart")
+      .getByText("Your shopping cart is empty!");
+    this.checkoutButton = page.getByRole("link", {
+      name: "Checkout",
+      exact: true,
+    });
   }
   async expectShoppingCart() {
     await expect(this.shoppingCart).toBeVisible();
@@ -22,6 +29,13 @@ class ShoppingCartPage {
   }
   async expectIMacProduct() {
     await expect(this.iMacProduct).toBeVisible();
+  }
+  async expectEmptyCart() {
+    await expect(this.emptyCart).toBeVisible();
+  }
+  async clickCheckout() {
+    await expect(this.checkoutButton).toBeVisible();
+    await this.checkoutButton.click();
   }
 }
 export default ShoppingCartPage;
