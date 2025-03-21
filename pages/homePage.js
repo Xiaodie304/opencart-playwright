@@ -40,6 +40,13 @@ class HomePage {
       .locator('button[formaction*="checkout/cart.add"]')
       .nth(1);
     this.checkoutButton = page.getByRole("link", { name: " Checkout" });
+    this.myAccountButton = page
+      .locator("#top")
+      .getByRole("link", { name: "My Account", exact: true });
+    this.myAccountFooter = page.getByRole("link", {
+      name: "My Account",
+      exact: true,
+    });
   }
 
   async goToHomePage() {
@@ -49,6 +56,9 @@ class HomePage {
 
   async openMyAccount() {
     await this.myAccountLink.click();
+  }
+  async clickMyAccount() {
+    await this.myAccountButton.click();
   }
 
   async clickLogin() {
@@ -109,6 +119,10 @@ class HomePage {
   }
   async clickCheckout() {
     await this.checkoutButton.click();
+  }
+  async expectMyAccountFooterAndClick() {
+    await expect(this.myAccountFooter).toBeVisible();
+    await this.myAccountFooter.click();
   }
 }
 

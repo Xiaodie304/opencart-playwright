@@ -11,9 +11,16 @@ class LoginPage {
       .getByRole("link", {
         name: "Forgotten Password",
       });
-    this.forgottenPasswordHeading = page.getByRole("heading", {
-      name: "Forgot Your Password?",
-    });
+    this.headingLogin = page
+      .getByRole("listitem")
+      .filter({ hasText: /^Login$/ });
+    this.forgottenPasswordLink = page
+      .locator("#form-login")
+      .getByRole("link", { name: "Forgotten Password" });
+    this.rightColumnForgottenPasswordLink = page
+      .locator("#column-right")
+      .getByRole("link", { name: "Forgotten Password" });
+    this.inputEmail = page.getByRole("textbox", { name: "E-Mail Address" });
   }
 
   async login() {
@@ -43,13 +50,19 @@ class LoginPage {
   async loginWithoutCredentials() {
     await this.loginButton.click();
   }
-  async expectForgottenPassword() {
-    await expect(this.forgottenPasswordLink).toBeVisible();
+  async expectLoginPage() {
+    await expect(this.headingLogin).toBeVisible();
   }
   async clickForgottenPassword() {
+    await expect(this.forgottenPasswordLink).toBeVisible();
     await this.forgottenPasswordLink.click();
-    await expect(this.page).toHaveURL(/en-gb\?route=account\/forgotten/);
-    await expect(this.forgottenPasswordHeading).toBeVisible();
+  }
+  async clickForgottenPasswordFromRightColumn() {
+    await expect(this.rightColumnForgottenPasswordLink).toBeVisible();
+    await this.rightColumnForgottenPasswordLink.click();
+  }
+  async inputEmailField(fillmail) {
+    await this.inputEmail.fill(fillmail);
   }
 }
 

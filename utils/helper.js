@@ -6,6 +6,7 @@ class Helper {
     this.emailField = page.getByRole("textbox", { name: "E-Mail Address" });
     this.passwordField = page.getByRole("textbox", { name: "Password" });
     this.loginButton = page.getByRole("button", { name: "Login" });
+    this.homeYourStore = page.getByRole("link", { name: "Your Store" });
   }
   async methodLogin() {
     await this.page.goto("/en-gb?route=common/home");
