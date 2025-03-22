@@ -1,0 +1,10 @@
+{
+  "emails": [
+    {
+      "id": 1,
+      "to": "test@example.com",
+      "subject": "Confirm your account",
+      "body": "Click <a href='https://your-app.com/confirm?token=abc123'>here</a> to confirm."
+    }
+  ]
+}

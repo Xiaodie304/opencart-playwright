@@ -13,6 +13,9 @@ class MyAccountPage {
     this.OderHistory = page
       .locator("#column-right")
       .getByRole("link", { name: "Order History" });
+    this.newsletterOption = page.getByRole("link", {
+      name: "Subscribe / unsubscribe to",
+    });
   }
   async expectLogin() {
     await expect(this.affiliateHeading).toBeVisible();
@@ -28,6 +31,9 @@ class MyAccountPage {
   }
   async expectOrderHistory() {
     await expect(this.OderHistory).toBeVisible();
+  }
+  async clickNewsletterOption() {
+    await this.newsletterOption.click();
   }
 }
 

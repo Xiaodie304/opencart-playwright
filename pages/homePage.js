@@ -47,6 +47,7 @@ class HomePage {
       name: "My Account",
       exact: true,
     });
+    this.registerButton = page.getByRole("link", { name: "Register" });
   }
 
   async goToHomePage() {
@@ -123,6 +124,9 @@ class HomePage {
   async expectMyAccountFooterAndClick() {
     await expect(this.myAccountFooter).toBeVisible();
     await this.myAccountFooter.click();
+  }
+  async clickRegister() {
+    await this.registerButton.click();
   }
 }
 
