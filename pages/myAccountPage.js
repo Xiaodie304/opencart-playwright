@@ -16,6 +16,9 @@ class MyAccountPage {
     this.newsletterOption = page.getByRole("link", {
       name: "Subscribe / unsubscribe to",
     });
+    this.newsletterButtonRightColumn = page
+      .locator("#column-right")
+      .getByRole("link", { name: "Newsletter" });
   }
   async expectLogin() {
     await expect(this.affiliateHeading).toBeVisible();
@@ -34,6 +37,9 @@ class MyAccountPage {
   }
   async clickNewsletterOption() {
     await this.newsletterOption.click();
+  }
+  async clickNewsletterRightColumn() {
+    await this.newsletterButtonRightColumn.click();
   }
 }
 

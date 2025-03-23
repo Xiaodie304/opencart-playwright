@@ -53,6 +53,5 @@ test.describe("Login", () => {
     await page.goBack();
     await home.openMyAccount();
     await home.expectLogoutHidden();
-    await page.pause();
   });
 });

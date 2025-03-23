@@ -6,10 +6,6 @@ const API_KEY = process.env.MAILSLURP_API_KEY;
 const BASE_URL = "https://api.mailslurp.com";
 const INBOX_ID = process.env.MAILSLURP_INBOX_ID;
 
-/**
- * Gọi API MailSlurp
- * @param {string} endpoint
- */
 async function callMailSlurpAPI(endpoint) {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     method: "GET",
@@ -20,25 +16,14 @@ async function callMailSlurpAPI(endpoint) {
   return await response.json();
 }
 
-/**
- * Lấy danh sách email trong inbox
- */
 export async function getEmails() {
   return await callMailSlurpAPI(`/inboxes/${INBOX_ID}/emails`);
 }
 
-/**
- * Lấy nội dung chi tiết của một email
- * @param {string} emailId - ID của email
- */
 export async function getEmailContent(emailId) {
   return await callMailSlurpAPI(`/emails/${emailId}`);
 }
 
-/**
- * Kiểm tra email có chứa nội dung mong muốn không
- * @param {string} expectedText - Nội dung mong muốn
- */
 export async function verifyEmailContainsText(expectedText) {
   const emails = await getEmails();
   if (emails.length === 0)
@@ -56,3 +41,4 @@ export async function verifyEmailContainsText(expectedText) {
   }
   console.log(`✅ Nội dung Email có: "${expectedText}"`);
 }
+export default verifyEmailContainsText;

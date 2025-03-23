@@ -6,17 +6,12 @@ class LoginPage {
     this.passwordField = page.getByRole("textbox", { name: "Password" });
     this.loginButton = page.getByRole("button", { name: "Login" });
     this.warningMessage = page.getByText("Warning: No match for E-Mail");
-    this.forgottenPasswordLink = this.page
-      .locator("#form-login")
-      .getByRole("link", {
-        name: "Forgotten Password",
-      });
-    this.headingLogin = page
-      .getByRole("listitem")
-      .filter({ hasText: /^Login$/ });
     this.forgottenPasswordLink = page
       .locator("#form-login")
       .getByRole("link", { name: "Forgotten Password" });
+    this.headingLogin = page
+      .getByRole("listitem")
+      .filter({ hasText: /^Login$/ });
     this.rightColumnForgottenPasswordLink = page
       .locator("#column-right")
       .getByRole("link", { name: "Forgotten Password" });

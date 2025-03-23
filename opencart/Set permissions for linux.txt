@@ -1,0 +1,15 @@
+Linux ubuntu 24.04
+1.
+docker compose up -d
+2.
+docker exec -it opencart-clone-opencart-1 bash
+3.
+chown -R www-data:www-data /var/www/html/system/storage/logs
+chmod -R 777 /var/www/html/system/storage/logs
+chown -R www-data:www-data /var/www/html/system/storage/cache /var/www/html/system/storage/vendor
+chmod -R 777 /var/www/html/system/storage/cache /var/www/html/system/storage/vendor
+chown -R www-data:www-data /var/www/html/image/cache
+chmod -R 777 /var/www/html/image/cache
+
+
+

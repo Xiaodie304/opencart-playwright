@@ -17,5 +17,10 @@ class Helper {
     await this.loginButton.click();
     await this.page.waitForNavigation();
   }
+  async login() {
+    await this.emailField.fill(process.env.TEST_USERNAME);
+    await this.passwordField.fill(process.env.TEST_PASSWORD);
+    await this.loginButton.click();
+  }
 }
 export default Helper;

@@ -88,15 +88,6 @@ test.describe("Forgot Password", () => {
     await home.clickLogin();
     await login.inputEmailField(process.env.TEST_USERNAME);
     await login.clickForgottenPassword();
-    await page.pause();
-    await forgottenPassword.expectEmailToBe(process.env.TEST_USERNAME);
-  });
-  test("TC09-Validate the email address provided in the 'E-Mail Address' field of 'Login' page, need to be carry forwarded to the 'Forgotten Password' page", async () => {
-    await home.goToHomePage();
-    await home.openMyAccount();
-    await home.clickLogin();
-    await login.inputEmailField(process.env.TEST_USERNAME);
-    await login.clickForgottenPassword();
     await forgottenPassword.expectEmailToBe(process.env.TEST_USERNAME);
   });
 });

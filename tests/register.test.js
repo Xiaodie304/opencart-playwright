@@ -1,21 +1,20 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../pages/homePage.js";
-import LoginPage from "../pages/loginPage.js";
 import MyAccountPage from "../pages/myAccountPage.js";
 import RegisterPage from "../pages/registerPage.js";
 import RegisterAccountForm from "../pages/forms/registerAccountForm.js";
-import { verifyEmailContainsText } from "../api/mailSlurp.js";
-import NewsletterPage from "../pages/newsletter.js";
+import verifyEmailContainsText from "../api/mailSlurp.js";
+import NewsletterPage from "../pages/newsletterPage.js";
+import createConnection from "../database/mysqlConnection.js";
 
 test.describe("Register", () => {
   let context;
   let page;
-  let login, home, myAccount, register, registerForm, newsletter;
+  let home, myAccount, register, registerForm, newsletter;
 
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
-    login = new LoginPage(page);
     home = new HomePage(page);
     myAccount = new MyAccountPage(page);
     register = new RegisterPage(page);
@@ -80,18 +79,54 @@ test.describe("Register", () => {
     await myAccount.clickNewsletterOption();
     await newsletter.expectNewsletterOff();
   });
-  test("TC05-Validate Registering an account when 'No' option is selected for Newsletter field", async () => {
+  test("TC05-Validate Registering an account by providing the existing account details (i.e. existing email address)", async () => {
+    await home.goToHomePage();
+    await home.openMyAccount();
+    await home.clickRegister();
+    await register.expectRegisterPage();
+    await register.fillExistingEmail();
+    await register.privacyPolicyCheck();
+    await register.clickContinueRegister();
+    await register.expectWarringSusscess();
+  });
+  test("TC6-Validate Registering an account by providing an invalid email address into the E-mail field", async () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickRegister();
     await register.expectRegisterPage();
     await registerForm.fillFullRegisterAccountAndSave();
+    await register.clearEmailAndFillNewEmail("example.com");
     await register.privacyPolicyCheck();
     await register.clickContinueRegister();
-    await register.expectNotiCreatedAccount();
+    await register.expectInvalidEmail();
+  });
+  test("TC07-Validate gthe details that are provided while Registering an account that are stored in the database", async () => {
+    await home.goToHomePage();
+    await home.openMyAccount();
+    await home.clickRegister();
+    await registerForm.fillFullRegisterAccountAndSave();
+    const email = await register.exportMail();
+    await register.privacyPolicyCheck();
+    await register.clickContinueRegister();
     await register.clickContinueAndGoToMyAccount();
-    await myAccount.expectMyAccount();
-    await myAccount.clickNewsletterOption();
-    await newsletter.expectNewsletterOff();
+    const connection = await createConnection();
+    const [rows] = await connection.execute(
+      "SELECT * FROM oc_customer WHERE email = ?",
+      [email]
+    );
+    if (rows.length) {
+      console.log("Registered first name:", rows[0].firstname);
+    }
+    expect(rows[0].email).toBe(email);
+    await connection.end();
+  });
+  test("TC08-Validate Registering account without checking 'Privacy Policy' checkbox option", async () => {
+    await home.goToHomePage();
+    await home.openMyAccount();
+    await home.clickRegister();
+    await register.expectRegisterPage();
+    await registerForm.fillFullRegisterAccountAndSave();
+    await register.clickContinueRegister();
+    await register.expectWarringSusscess();
   });
 });

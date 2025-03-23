@@ -48,6 +48,7 @@ class HomePage {
       exact: true,
     });
     this.registerButton = page.getByRole("link", { name: "Register" });
+    this.newsletterButton = page.getByRole("link", { name: "Newsletter" });
   }
 
   async goToHomePage() {
@@ -127,6 +128,9 @@ class HomePage {
   }
   async clickRegister() {
     await this.registerButton.click();
+  }
+  async clickNewsletter() {
+    await this.newsletterButton.click();
   }
 }
 

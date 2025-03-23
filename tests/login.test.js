@@ -62,7 +62,6 @@ test.describe("Login", () => {
     await home.goToHomePage();
     await home.openMyAccount();
     await home.clickLogin();
-    await login.expectForgottenPassword();
     await login.clickForgottenPassword();
   });
   test("TC-07 Validate logging into the application and browsing back using browsing back button", async () => {

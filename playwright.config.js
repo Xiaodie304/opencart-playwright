@@ -5,7 +5,7 @@ dotenv.config();
 
 export default defineConfig({
   testDir: "tests",
-  workers: 1,
+  workers: 3,
   reporter: [["html", { open: "never" }]],
   //globalSetup: "./setup/globalSetup.js",
   use: {
@@ -18,7 +18,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "e2e",
+      name: "e2e-chromium",
       use: { browserName: "chromium" },
     },
   ],
