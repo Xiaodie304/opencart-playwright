@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: [["html", { open: "never" }]],
   //globalSetup: "./setup/globalSetup.js",
   use: {
-    headless: false,
+    headless: true,
     viewport: { width: 1366, height: 768 },
     baseURL: process.env.BASE_URL,
     screenshot: "only-on-failure",
