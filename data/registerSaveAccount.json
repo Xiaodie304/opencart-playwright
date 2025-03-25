@@ -138,5 +138,54 @@
     "email": "may72_20250323@example.com",
     "password": "drHQV75isQ*#",
     "createdAt": "2025-03-23T14:48:00.272Z"
+  },
+  {
+    "firstName": "Stan",
+    "lastName": "Friesen-Carter",
+    "email": "jacynthe_blanda_20250325@example.com",
+    "password": "46q@w0)4Qw5m",
+    "createdAt": "2025-03-25T07:44:49.135Z"
+  },
+  {
+    "firstName": "Laisha",
+    "lastName": "Emmerich",
+    "email": "leon88_20250325@example.com",
+    "password": "zQuRR79JhUqE",
+    "createdAt": "2025-03-25T07:44:50.902Z"
+  },
+  {
+    "firstName": "Emerson",
+    "lastName": "Schneider",
+    "email": "neoma.runolfsdottir_20250325@example.com",
+    "password": "KvJ1qb@U)GKr",
+    "createdAt": "2025-03-25T07:44:54.290Z"
+  },
+  {
+    "firstName": "Vivien",
+    "lastName": "Heathcote",
+    "email": "savannah.yundt-hamill61_20250325@example.com",
+    "password": "TWO@DSkPvQ#3",
+    "createdAt": "2025-03-25T07:44:56.548Z"
+  },
+  {
+    "firstName": "Gwen",
+    "lastName": "Spinka",
+    "email": "chanelle_bergnaum61_20250325@example.com",
+    "password": "z&eh3&pGrGFD",
+    "createdAt": "2025-03-25T07:45:00.388Z"
+  },
+  {
+    "firstName": "Jillian",
+    "lastName": "Dicki",
+    "email": "jaida_beahan-dicki_20250325@example.com",
+    "password": "uaI1pWJy7(Gh",
+    "createdAt": "2025-03-25T07:45:02.362Z"
+  },
+  {
+    "firstName": "Americo",
+    "lastName": "Hettinger",
+    "email": "maryjane4_20250325@example.com",
+    "password": "w98jEszeU@cP",
+    "createdAt": "2025-03-25T07:45:04.711Z"
   }
 ]
